@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D LINE - Студия 3D-технологий</title>
+    <script>
+        if (localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        .dark body {
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .dark .bg-white {
+            background-color: #1f2937;
+        }
+        .dark .bg-gray-100 {
+            background-color: #111827;
+        }
+        .dark .bg-gray-50 {
+            background-color: #1f2937;
+        }
+        .dark .text-gray-600, .dark .text-gray-700 {
+            color: #d1d5db;
+        }
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .dark .bg-indigo-100 {
+            background-color: #3730a3;
+        }
+        .dark .text-indigo-600 {
+            color: #818cf8;
+        }
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_12_2025-09-13_18-41-33.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl font-bold text-indigo-600" style="text-shadow: 0 4px 8px rgba(0,0,0,0.3);">3D LINE</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-indigo-600 transition">Услуги</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600 transition">О нас</a>
+                    <a href="#portfolio" class="text-gray-700 hover:text-indigo-600 transition">Портфолио</a>
+                    <a href="#contacts" class="text-gray-700 hover:text-indigo-600 transition">Контакты</a>
+                    <button id="theme-toggle" class="p-2 rounded-full focus:outline-none relative w-12 h-6 transition-colors duration-500 ease-in-out bg-gray-300 dark:bg-gray-600 rounded-full">
+                        <span id="theme-icon" class="absolute left-0 top-0 w-6 h-6 rounded-full bg-white dark:bg-yellow-300 shadow-md transform transition-transform duration-300 ease-in-out flex items-center justify-center">
+                            <i id="sun-icon" data-feather="sun" class="w-4 h-4 text-yellow-500 dark:opacity-0"></i>
+                            <i id="moon-icon" data-feather="moon" class="w-4 h-4 text-gray-700 absolute opacity-0 dark:opacity-100"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700 focus:outline-none">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="flex items-center justify-center h-screen text-white">
+        <div class="container mx-auto px-6 text-center" data-aos="fade-up">
+            <h1 class="text-3xl md:text-5xl font-bold mb-2">Студия 3D технологий во Владикавказе</h1>
+            <h2 class="text-5xl md:text-7xl mb-8 font-bold text-indigo-400" style="text-shadow: 0 4px 8px rgba(0,0,0,0.3);">3D LINE</h2>
+            <p class="text-xl md:text-2xl mb-12">От идеи до реализации: печать, сканирование, моделирование</p>
+            <a href="#services" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block">Наши услуги</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Наши услуги</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-8 rounded-lg shadow-md transition duration-300" data-aos="fade-up">
+                    <div class="text-indigo-600 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4 4 4 0 0 1 4 4z"/>
+                            <path d="M12 16V8"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">3D-печать</h3>
+                    <p class="text-gray-600">Высокоточная печать на современных принтерах любой сложности. Используем различные материалы для воплощения ваших проектов.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-8 rounded-lg shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-indigo-600 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v2M12 20v2M4 12H2M22 12h-2"/>
+                            <path d="M5.64 5.64l1.41 1.41M16.95 16.95l1.41 1.41M5.64 18.36l1.41-1.41M16.95 7.05l1.41-1.41"/>
+                            <circle cx="12" cy="12" r="4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">3D-сканирование</h3>
+                    <p class="text-gray-600">Создание цифровых копий объектов любого размера с высокой точностью. Превращаем реальные объекты в цифровые модели.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-8 rounded-lg shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-indigo-600 mb-4">
+                        <i data-feather="box" class="w-12 h-12"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">3D-моделирование</h3>
+                    <p class="text-gray-600">Разработка и доработка 3D-моделей для игр, анимации и печати. Наши дизайнеры создадут любую модель по вашему запросу.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                    <img src="https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_2025-09-13_19-09-39.jpg" alt="3D технологии" class="rounded-lg shadow-xl">
+                    <div class="mt-4 text-center">
+                        <a href="https://www.avito.ru/vladikavkaz/predlozheniya_uslug/3d_pechat_i_3d_skanirovanie_2634518521?utm_campaign=native&utm_medium=item_page_android&utm_source=soc_sharing_seller" 
+                           class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-full transition duration-300">
+                           Перейти в профиль Авито
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">О нашей студии</h2>
+                    <p class="text-gray-600 mb-6">Мы - команда профессионалов с более чем 3-летним опытом работы в сфере 3D-технологий. Наша студия оснащена современным оборудованием, позволяющим реализовывать проекты любой сложности.</p>
+                    <p class="text-gray-600 mb-6">Наш подход сочетает в себе техническую экспертизу и творческое видение, что позволяет нам предлагать клиентам не просто услуги, а комплексные решения.</p>
+                    <p class="text-gray-600 mb-8">Мы гарантируем качество всех работ и индивидуальный подход к каждому проекту, будь то прототипирование, создание моделей или сканирование объектов.</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-indigo-100 text-indigo-600 px-4 py-2 rounded-full font-medium">3+ года опыта</div>
+                        <div class="bg-indigo-100 text-indigo-600 px-4 py-2 rounded-full font-medium">100+ проектов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Наши работы</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="portfolio-item overflow-hidden rounded-lg shadow-md" data-aos="zoom-in">
+                    <img src="https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_5_2025-09-13_18-41-33.jpg" alt="Портфолио 1" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="portfolio-item overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_6_2025-09-13_18-41-33.jpg" alt="Портфолио 2" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="portfolio-item overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_7_2025-09-13_18-41-33.jpg" alt="Портфолио 3" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="portfolio-item overflow-hidden rounded-lg shadow-md" data-aos="zoom-in">
+                    <img src="https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_8_2025-09-13_18-41-33.jpg" alt="Портфолио 4" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="portfolio-item overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_9_2025-09-13_18-41-33.jpg" alt="Портфолио 5" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="portfolio-item overflow-hidden rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_10_2025-09-13_18-41-33.jpg" alt="Портфолио 6" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="https://t.me/studio3dLINE" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">Смотреть все работы</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Отзывы клиентов</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">А</div>
+                        <div>
+                            <h4 class="font-bold">Алан</h4>
+                            <div class="flex text-yellow-400">
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Заказал печать детали для квадрокоптера. Сделали быстро и качественно, все точно по размерам. Теперь только к ним!"</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">М</div>
+                        <div>
+                            <h4 class="font-bold">Марина</h4>
+                            <div class="flex text-yellow-400">
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Отсканировали старинную вазу бабушки для создания цифрового архива. Очень бережно отнеслись к предмету, результат превзошел ожидания."</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">Д</div>
+                        <div>
+                            <h4 class="font-bold">Денис</h4>
+                            <div class="flex text-yellow-400">
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Разработали 3D-модель для моего изобретения. Учли все пожелания, внесли профессиональные корректировки. Теперь готов прототип для презентации инвесторам."</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">С</div>
+                        <div>
+                            <h4 class="font-bold">Светлана</h4>
+                            <div class="flex text-yellow-400">
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Заказывали печать сувениров для корпоратива. Сделали в срок, упаковали каждое изделие индивидуально. Коллеги были в восторге!"</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="https://www.avito.ru/vladikavkaz/predlozheniya_uslug/3d_pechat_i_3d_skanirovanie_2634518521?utm_campaign=native&utm_medium=item_page_android&utm_source=soc_sharing_seller" 
+                   class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                   Прочитать все отзывы и/или добавить свой
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Контакты</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold mb-6">Наши контакты</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-indigo-600 mr-4 mt-1">
+                                <i data-feather="map-pin"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Адрес</h4>
+                                <p class="text-gray-600">г. Владикавказ, ул. Гагкаева, 5, корпус 7</p>
+                                <p class="text-gray-500 text-sm mt-1">Договариваться о встрече заранее по телефону или в социальных сетях</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-indigo-600 mr-4 mt-1">
+                                <i data-feather="phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Телефон</h4>
+                                <p class="text-gray-600">8 (909) 318-64-11</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-indigo-600 mr-4 mt-1">
+                                <i data-feather="clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Часы работы</h4>
+                                <p class="text-gray-600">Пн-Пт: 9:00 - 21:00<br>Сб-Вс: По договоренности</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-bold mb-6">Мы на карте</h3>
+                        <div class="h-64 bg-gray-300 rounded-lg overflow-hidden">
+                            <!-- Google Maps iframe placeholder -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2913.76240131896!2d44.66365821548852!3d43.03102987914666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4051f7c7f8b7f0a1%3A0x1d1a1b1b1b1b1b1b!2z0YPQuy4g0JPRg9Cz0LrQsNC10L3QsCwgNSwg0JLRg9C70LjRhtC60LDRjyDQk9Cw0LvQsNC90LAsINCR0LDRgNC60L7QstC-0YDQvtCz0L7RgNC-0LTRgdC60LDRjyDQvtCx0LsuLCAzNjIwMjM!5e0!3m2!1sru!2sru!4v1620000000000!5m2!1sru!2sru" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">3D LINE</h3>
+                    <p class="text-gray-400 mb-4">Студия 3D-технологий. От идеи до реализации.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://t.me/studio3dLINE" class="text-gray-400 hover:text-white transition">
+                            <i data-feather="send"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i data-feather="map-pin" class="mr-2 w-4 h-4"></i>
+                            <span class="text-gray-400">г. Владикавказ, ул. Гагкаева, 5, корпус 7</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="phone" class="mr-2 w-4 h-4"></i>
+                            <span class="text-gray-400">8 (909) 318-64-11</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="mail" class="mr-2 w-4 h-4"></i>
+                            <span class="text-gray-400">3dlinestudio15@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        feather.replace();
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('darkMode', isDark);
+            
+            if (isDark) {
+                themeIcon.style.transform = 'translateX(24px)';
+            } else {
+                themeIcon.style.transform = 'translateX(0)';
+            }
+            feather.replace();
+        });
+
+        // Set initial position
+        if (document.documentElement.classList.contains('dark')) {
+            themeIcon.style.transform = 'translateX(24px)';
+        } else {
+            themeIcon.style.transform = 'translateX(0)';
+        }
+        
+        // Mobile menu toggle
+        document.querySelector('.md\\:hidden button').addEventListener('click', function() {
+            const menu = document.querySelector('.md\\:flex.items-center.space-x-8');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex', 'flex-col', 'absolute', 'top-16', 'left-0', 'right-0', 'bg-white', 'py-4', 'space-y-4', 'shadow-lg');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex', 'flex-col', 'absolute', 'top-16', 'left-0', 'right-0', 'bg-white', 'py-4', 'space-y-4', 'shadow-lg');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
