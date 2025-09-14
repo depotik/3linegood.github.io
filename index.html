@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D LINE - Студия 3D-технологий</title>
+    <title>3D Печать Владикавказ</title>
+    <meta name="description" content="Студия 3d печати во Владикавказе 3D LINE">
+    <link rel="icon" type="image/x-icon" href="favi.jpg">
     <script>
+        // Проверяем, включена ли темная тема в localStorage или в настройках системы
         if (localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
@@ -16,36 +19,63 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
     <style>
+        /* CSS-переменные для светлой темы */
+        :root {
+            --bg-body-light: #f9fafb;
+            --bg-white-light: #ffffff;
+            --bg-gray-100-light: #f3f4f6;
+            --bg-gray-50-light: #f9fafb;
+            --text-gray-600-light: #4b5563;
+            --text-gray-700-light: #374151;
+            --bg-indigo-100-light: #e0e7ff;
+            --text-indigo-600-light: #4f46e5;
+            --text-gray-900-light: #111827;
+        }
+
+        /* CSS-переменные для темной темы */
+        .dark {
+            --bg-body-dark: #111827;
+            --bg-white-dark: #1f2937;
+            --bg-gray-100-dark: #111827;
+            --bg-gray-50-dark: #1f2937;
+            --text-gray-600-dark: #d1d5db;
+            --text-gray-700-dark: #d1d5db;
+            --bg-indigo-100-dark: #3730a3;
+            --text-indigo-600-dark: #818cf8;
+            --text-gray-900-dark: #f3f4f6;
+        }
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease;
+            background-color: var(--bg-body-light);
+            color: var(--text-gray-900-light);
+            transition: background-color 0.3s, color 0.3s;
         }
+
         .dark body {
-            background-color: #111827;
-            color: #f3f4f6;
+            background-color: var(--bg-body-dark);
+            color: var(--text-gray-900-dark);
         }
-        .dark .bg-white {
-            background-color: #1f2937;
-        }
-        .dark .bg-gray-100 {
-            background-color: #111827;
-        }
-        .dark .bg-gray-50 {
-            background-color: #1f2937;
-        }
-        .dark .text-gray-600, .dark .text-gray-700 {
-            color: #d1d5db;
-        }
-        .dark .shadow-md {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        .dark .bg-indigo-100 {
-            background-color: #3730a3;
-        }
-        .dark .text-indigo-600 {
-            color: #818cf8;
-        }
+
+        /* Применяем переменные ко всем элементам с соответствующими классами */
+        .bg-white { background-color: var(--bg-white-light); transition: background-color 0.3s; }
+        .dark .bg-white { background-color: var(--bg-white-dark); }
+        .bg-gray-100 { background-color: var(--bg-gray-100-light); transition: background-color 0.3s; }
+        .dark .bg-gray-100 { background-color: var(--bg-gray-100-dark); }
+        .bg-gray-50 { background-color: var(--bg-gray-50-light); transition: background-color 0.3s; }
+        .dark .bg-gray-50 { background-color: var(--bg-gray-50-dark); }
+        .text-gray-600, .text-gray-700 { color: var(--text-gray-600-light); transition: color 0.3s; }
+        .dark .text-gray-600, .dark .text-gray-700 { color: var(--text-gray-600-dark); }
+        .text-gray-900 { color: var(--text-gray-900-light); transition: color 0.3s; }
+        .dark .text-gray-900 { color: var(--text-gray-900-dark); }
+        .text-indigo-600 { color: var(--text-indigo-600-light); transition: color 0.3s; }
+        .dark .text-indigo-600 { color: var(--text-indigo-600-dark); }
+        .bg-indigo-100 { background-color: var(--bg-indigo-100-light); transition: background-color 0.3s; }
+        .dark .bg-indigo-100 { background-color: var(--bg-indigo-100-dark); }
+        .shadow-md { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s; }
+        .dark .shadow-md { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); }
+
         #hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://huggingface.co/spaces/bononf/3d-line/resolve/main/images/photo_12_2025-09-13_18-41-33.jpg');
             background-size: cover;
@@ -66,11 +96,11 @@
                     <span class="text-3xl font-bold text-indigo-600" style="text-shadow: 0 4px 8px rgba(0,0,0,0.3);">3D LINE</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="text-gray-700 hover:text-indigo-600 transition">Услуги</a>
-                    <a href="#about" class="text-gray-700 hover:text-indigo-600 transition">О нас</a>
-                    <a href="#portfolio" class="text-gray-700 hover:text-indigo-600 transition">Портфолио</a>
-                    <a href="#contacts" class="text-gray-700 hover:text-indigo-600 transition">Контакты</a>
-                    <button id="theme-toggle" class="p-2 rounded-full focus:outline-none relative w-12 h-6 transition-colors duration-500 ease-in-out bg-gray-300 dark:bg-gray-600 rounded-full">
+                    <a href="#services" class="text-gray-700 hover:text-indigo-600">Услуги</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600">О нас</a>
+                    <a href="#portfolio" class="text-gray-700 hover:text-indigo-600">Портфолио</a>
+                    <a href="#contacts" class="text-gray-700 hover:text-indigo-600">Контакты</a>
+                    <button id="theme-toggle" class="p-2 rounded-full focus:outline-none relative w-12 h-6 duration-500 ease-in-out bg-gray-300 dark:bg-gray-600 rounded-full">
                         <span id="theme-icon" class="absolute left-0 top-0 w-6 h-6 rounded-full bg-white dark:bg-yellow-300 shadow-md transform transition-transform duration-300 ease-in-out flex items-center justify-center">
                             <i id="sun-icon" data-feather="sun" class="w-4 h-4 text-yellow-500 dark:opacity-0"></i>
                             <i id="moon-icon" data-feather="moon" class="w-4 h-4 text-gray-700 absolute opacity-0 dark:opacity-100"></i>
@@ -102,11 +132,11 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Наши услуги</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Service 1 -->
-                <div class="service-card bg-white p-8 rounded-lg shadow-md transition duration-300" data-aos="fade-up">
+                <div class="service-card bg-white p-8 rounded-lg shadow-md duration-300" data-aos="fade-up">
                     <div class="text-indigo-600 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"/>
-                            <path d="M16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4 4 4 0 0 1 4 4z"/>
+                            <path d="M16 12a4 0 0 1-4 4 4 0 0 1-4-4 4 0 0 1 4-4 4 0 0 1 4 4z"/>
                             <path d="M12 16V8"/>
                         </svg>
                     </div>
@@ -114,7 +144,7 @@
                     <p class="text-gray-600">Высокоточная печать на современных принтерах любой сложности. Используем различные материалы для воплощения ваших проектов.</p>
                 </div>
                 <!-- Service 2 -->
-                <div class="service-card bg-white p-8 rounded-lg shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card bg-white p-8 rounded-lg shadow-md duration-300" data-aos="fade-up" data-aos-delay="100">
                     <div class="text-indigo-600 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2v2M12 20v2M4 12H2M22 12h-2"/>
@@ -126,7 +156,7 @@
                     <p class="text-gray-600">Создание цифровых копий объектов любого размера с высокой точностью. Превращаем реальные объекты в цифровые модели.</p>
                 </div>
                 <!-- Service 3 -->
-                <div class="service-card bg-white p-8 rounded-lg shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card bg-white p-8 rounded-lg shadow-md duration-300" data-aos="fade-up" data-aos-delay="200">
                     <div class="text-indigo-600 mb-4">
                         <i data-feather="box" class="w-12 h-12"></i>
                     </div>
@@ -330,7 +360,7 @@
                     <h3 class="text-xl font-bold mb-4">3D LINE</h3>
                     <p class="text-gray-400 mb-4">Студия 3D-технологий. От идеи до реализации.</p>
                     <div class="flex space-x-4">
-                        <a href="https://t.me/studio3dLINE" class="text-gray-400 hover:text-white transition">
+                        <a href="https://t.me/studio3dLINE" class="text-gray-400 hover:text-white">
                             <i data-feather="send"></i>
                         </a>
                     </div>
@@ -367,31 +397,32 @@
         
         feather.replace();
 
-        // Theme toggle
+        // Переключение темы
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
-        
+        const htmlElement = document.documentElement;
+
         themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            const isDark = document.documentElement.classList.contains('dark');
-            localStorage.setItem('darkMode', isDark);
-            
-            if (isDark) {
+            const isDark = htmlElement.classList.contains('dark');
+            htmlElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', !isDark);
+
+            // Перемещаем ползунок
+            if (!isDark) {
                 themeIcon.style.transform = 'translateX(24px)';
             } else {
                 themeIcon.style.transform = 'translateX(0)';
             }
-            feather.replace();
         });
 
-        // Set initial position
-        if (document.documentElement.classList.contains('dark')) {
+        // Установка начальной позиции переключателя
+        if (htmlElement.classList.contains('dark')) {
             themeIcon.style.transform = 'translateX(24px)';
         } else {
             themeIcon.style.transform = 'translateX(0)';
         }
         
-        // Mobile menu toggle
+        // Переключение мобильного меню
         document.querySelector('.md\\:hidden button').addEventListener('click', function() {
             const menu = document.querySelector('.md\\:flex.items-center.space-x-8');
             if (menu.classList.contains('hidden')) {
@@ -403,7 +434,7 @@
             }
         });
         
-        // Smooth scrolling for anchor links
+        // Плавная прокрутка для якорных ссылок
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -414,5 +445,4 @@
         });
     </script>
 </body>
-
 </html>
